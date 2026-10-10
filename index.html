@@ -5,49 +5,115 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mobiwax – Kapında Araç Yıkama</title>
   <meta name="description" content="Mobiwax ile aracını olduğun yerde yıkatırsın. Uygulamadan randevu al, ekibimiz kapına gelsin.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #0a84ff;
+      --primary-2: #00c6ff;
       --dark: #0b1b2b;
-      --text: #33414e;
-      --light: #f3f7fb;
+      --text: #4a5a6a;
+      --light: #f4f8fc;
+      --border: #e6edf4;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--text); background: #fff; line-height: 1.6; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--text); background: #fff; line-height: 1.6; }
     a { color: inherit; text-decoration: none; }
-    .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
 
-    header { padding: 18px 0; border-bottom: 1px solid #eef1f4; }
-    header .container { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 800; color: var(--dark); }
+    /* Header */
+    header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    header .container { display: flex; justify-content: space-between; align-items: center; height: 68px; }
+    .logo { font-size: 1.45rem; font-weight: 800; color: var(--dark); letter-spacing: -.5px; display: flex; align-items: center; gap: 8px; }
+    .logo-mark { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, var(--primary), var(--primary-2)); display: grid; place-items: center; color: #fff; font-size: 1rem; }
     .logo span { color: var(--primary); }
-    nav a { margin-left: 24px; font-weight: 500; }
+    nav { display: flex; align-items: center; gap: 28px; font-weight: 500; font-size: .95rem; }
     nav a:hover { color: var(--primary); }
+    nav .btn { padding: 10px 18px; margin: 0; }
 
-    .hero { background: linear-gradient(135deg, var(--dark), #123a63); color: #fff; padding: 100px 0; text-align: center; }
-    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; margin-bottom: 16px; }
-    .hero p { font-size: 1.15rem; opacity: .85; max-width: 560px; margin: 0 auto 32px; }
-    .btn { display: inline-block; background: var(--primary); color: #fff; padding: 14px 28px; border-radius: 10px; font-weight: 600; margin: 6px; }
-    .btn.outline { background: transparent; border: 2px solid #fff; }
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--primary), #3a9cff); color: #fff; padding: 14px 26px; border-radius: 12px; font-weight: 600; box-shadow: 0 8px 20px rgba(10,132,255,.25); transition: transform .2s, box-shadow .2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(10,132,255,.35); }
+    .btn.ghost { background: #fff; color: var(--dark); border: 1px solid var(--border); box-shadow: none; }
+    .btn.ghost:hover { border-color: var(--primary); color: var(--primary); }
 
-    section { padding: 80px 0; }
-    h2 { text-align: center; font-size: 2rem; color: var(--dark); margin-bottom: 48px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
-    .card { background: var(--light); padding: 28px; border-radius: 14px; text-align: center; }
-    .card .icon { font-size: 2.2rem; margin-bottom: 12px; }
-    .card h3 { color: var(--dark); margin-bottom: 8px; }
+    /* Hero */
+    .hero { position: relative; overflow: hidden; padding: 90px 0 100px; background: radial-gradient(circle at 85% 20%, rgba(0,198,255,.18), transparent 45%), radial-gradient(circle at 10% 90%, rgba(10,132,255,.12), transparent 40%), var(--light); }
+    .hero .container { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--border); padding: 6px 14px; border-radius: 999px; font-size: .85rem; font-weight: 600; color: var(--primary); margin-bottom: 22px; }
+    .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 4px rgba(34,197,94,.2); }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.1; color: var(--dark); letter-spacing: -1.5px; margin-bottom: 20px; }
+    .hero h1 .grad { background: linear-gradient(135deg, var(--primary), var(--primary-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p { font-size: 1.12rem; max-width: 500px; margin-bottom: 32px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .stats { display: flex; gap: 36px; margin-top: 44px; }
+    .stats strong { display: block; font-size: 1.5rem; color: var(--dark); }
+    .stats small { font-size: .85rem; }
+
+    /* Phone mockup */
+    .phone { width: 280px; margin: 0 auto; background: var(--dark); border-radius: 40px; padding: 12px; box-shadow: 0 30px 60px rgba(11,27,43,.25); transform: rotate(3deg); }
+    .screen { background: #fff; border-radius: 30px; padding: 22px 18px; min-height: 500px; }
+    .screen-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    .screen-top b { color: var(--dark); font-size: 1.05rem; }
+    .avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #ffd56b, #ff9a6b); }
+    .map { height: 150px; border-radius: 18px; background: linear-gradient(135deg, #dff1ff, #eaf9ff); position: relative; margin-bottom: 16px; overflow: hidden; }
+    .map::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(#cfe6f7 1px, transparent 1px), linear-gradient(90deg, #cfe6f7 1px, transparent 1px); background-size: 28px 28px; }
+    .pin { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); font-size: 1.8rem; }
+    .pill-row { display: flex; gap: 8px; margin-bottom: 16px; }
+    .pill { flex: 1; text-align: center; font-size: .75rem; font-weight: 600; padding: 8px 4px; border-radius: 10px; background: var(--light); color: var(--dark); }
+    .pill.active { background: var(--primary); color: #fff; }
+    .order { border: 1px solid var(--border); border-radius: 16px; padding: 14px; margin-bottom: 14px; }
+    .order div { display: flex; justify-content: space-between; font-size: .85rem; }
+    .order div + div { margin-top: 6px; }
+    .order b { color: var(--dark); }
+    .screen .cta-btn { display: block; text-align: center; background: var(--primary); color: #fff; padding: 12px; border-radius: 12px; font-weight: 600; font-size: .9rem; }
+
+    /* Sections */
+    section { padding: 96px 0; }
+    .section-head { text-align: center; max-width: 560px; margin: 0 auto 56px; }
+    .eyebrow { color: var(--primary); font-weight: 700; font-size: .85rem; letter-spacing: 1.5px; text-transform: uppercase; }
+    .section-head h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); color: var(--dark); letter-spacing: -.8px; margin: 8px 0 12px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
+    .card { background: #fff; border: 1px solid var(--border); padding: 32px 28px; border-radius: 20px; transition: transform .25s, box-shadow .25s, border-color .25s; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(11,27,43,.08); border-color: transparent; }
+    .icon { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-size: 1.6rem; background: linear-gradient(135deg, #e3f1ff, #e6fbff); margin-bottom: 20px; }
+    .card h3 { color: var(--dark); font-size: 1.2rem; margin-bottom: 8px; }
+    .price { margin-top: 16px; font-weight: 700; color: var(--primary); }
+
     .alt { background: var(--light); }
-    .alt .card { background: #fff; }
-    .step-no { display: inline-flex; width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: #fff; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 12px; }
+    .steps { counter-reset: step; }
+    .step { position: relative; }
+    .step-no { width: 44px; height: 44px; border-radius: 14px; background: var(--dark); color: #fff; display: grid; place-items: center; font-weight: 700; margin-bottom: 20px; }
 
-    .cta { text-align: center; }
-    .cta p { margin-bottom: 24px; }
+    /* CTA */
+    .cta-box { background: linear-gradient(135deg, var(--dark), #123a63); border-radius: 28px; padding: 64px 32px; text-align: center; color: #fff; position: relative; overflow: hidden; }
+    .cta-box::after { content: ""; position: absolute; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(0,198,255,.35), transparent 70%); top: -140px; right: -100px; }
+    .cta-box h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 12px; position: relative; z-index: 1; }
+    .cta-box p { opacity: .8; margin: 0 auto 32px; max-width: 480px; position: relative; z-index: 1; }
+    .cta-box .hero-actions { justify-content: center; position: relative; z-index: 1; }
+    .store { background: #fff; color: var(--dark); box-shadow: none; }
+    .store:hover { box-shadow: 0 10px 24px rgba(0,0,0,.2); }
+    .mail { margin-top: 28px; font-size: .95rem; opacity: .85; position: relative; z-index: 1; }
+    .mail a { color: var(--primary-2); font-weight: 600; }
 
-    footer { background: var(--dark); color: #aab6c3; text-align: center; padding: 28px 0; font-size: .9rem; }
+    footer { border-top: 1px solid var(--border); padding: 28px 0; font-size: .9rem; }
+    footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    footer a:hover { color: var(--primary); }
 
+    @media (max-width: 860px) {
+      .hero .container { grid-template-columns: 1fr; text-align: center; }
+      .hero p { margin-left: auto; margin-right: auto; }
+      .hero-actions, .stats { justify-content: center; }
+      .phone { transform: none; margin-top: 16px; }
+    }
     @media (max-width: 600px) {
-      nav { display: none; }
-      .hero { padding: 70px 0; }
+      nav a:not(.btn) { display: none; }
+      .hero { padding: 60px 0 70px; }
+      section { padding: 72px 0; }
+      .stats { gap: 24px; }
+      footer .container { justify-content: center; text-align: center; }
     }
   </style>
 </head>
@@ -55,42 +121,77 @@
 
   <header>
     <div class="container">
-      <a href="#" class="logo">mobi<span>wax</span></a>
+      <a href="#" class="logo"><span class="logo-mark">💧</span><b>mobi<span>wax</span></b></a>
       <nav>
         <a href="#hizmetler">Hizmetler</a>
         <a href="#nasil">Nasıl Çalışır?</a>
-        <a href="#iletisim">İletişim</a>
+        <a href="#iletisim" class="btn">İndir</a>
       </nav>
     </div>
   </header>
 
   <div class="hero">
     <div class="container">
-      <h1>Aracın nerede, biz oradayız.</h1>
-      <p>Mobiwax ile araç yıkamaya gitmene gerek yok. Uygulamadan randevu al, ekibimiz kapına gelip aracını pırıl pırıl yapsın.</p>
-      <a href="#iletisim" class="btn">Uygulamayı İndir</a>
-      <a href="#nasil" class="btn outline">Nasıl Çalışır?</a>
+      <div>
+        <div class="badge">Kapında araç yıkama</div>
+        <h1>Aracın nerede,<br><span class="grad">biz oradayız.</span></h1>
+        <p>Yıkamacıya gitmene gerek yok. Uygulamadan birkaç dokunuşla randevu al, ekibimiz kapına gelip aracını pırıl pırıl yapsın.</p>
+        <div class="hero-actions">
+          <a href="#iletisim" class="btn">Uygulamayı İndir →</a>
+          <a href="#nasil" class="btn ghost">Nasıl Çalışır?</a>
+        </div>
+        <div class="stats">
+          <div><strong>30 dk</strong><small>Ortalama süre</small></div>
+          <div><strong>7/24</strong><small>Randevu</small></div>
+          <div><strong>%100</strong><small>Kapında hizmet</small></div>
+        </div>
+      </div>
+
+      <div class="phone" aria-hidden="true">
+        <div class="screen">
+          <div class="screen-top">
+            <b>Merhaba 👋</b>
+            <div class="avatar"></div>
+          </div>
+          <div class="map"><div class="pin">📍</div></div>
+          <div class="pill-row">
+            <div class="pill active">Dış</div>
+            <div class="pill">İç</div>
+            <div class="pill">Wax</div>
+          </div>
+          <div class="order">
+            <div><span>Hizmet</span><b>Dış Yıkama</b></div>
+            <div><span>Saat</span><b>Bugün 14:30</b></div>
+            <div><span>Konum</span><b>Evim</b></div>
+          </div>
+          <span class="cta-btn">Randevu Al</span>
+        </div>
+      </div>
     </div>
   </div>
 
   <section id="hizmetler">
     <div class="container">
-      <h2>Hizmetlerimiz</h2>
+      <div class="section-head">
+        <div class="eyebrow">Hizmetler</div>
+        <h2>Aracın için ihtiyacın olan her şey</h2>
+        <p>Su ve ekipman bizden, sen sadece konumu seç.</p>
+      </div>
       <div class="grid">
         <div class="card">
           <div class="icon">🚗</div>
           <h3>Dış Yıkama</h3>
-          <p>Köpüklü yıkama, jant temizliği ve kurulama.</p>
+          <p>Köpüklü yıkama, jant temizliği ve mikrofiber kurulama.</p>
         </div>
         <div class="card">
           <div class="icon">🧽</div>
           <h3>İç Temizlik</h3>
-          <p>Süpürme, torpido ve kapı içi detaylı temizlik.</p>
+          <p>Süpürme, torpido, koltuk ve kapı içi detaylı temizlik.</p>
         </div>
         <div class="card">
           <div class="icon">✨</div>
           <h3>Cila & Wax</h3>
-          <p>Boyayı koruyan, parlaklık veren wax uygulaması.</p>
+          <p>Boyayı koruyan, uzun süre parlaklık veren wax uygulaması.</p>
         </div>
       </div>
     </div>
@@ -98,19 +199,22 @@
 
   <section id="nasil" class="alt">
     <div class="container">
-      <h2>Nasıl Çalışır?</h2>
+      <div class="section-head">
+        <div class="eyebrow">Nasıl Çalışır?</div>
+        <h2>3 adımda tertemiz araç</h2>
+      </div>
       <div class="grid">
-        <div class="card">
+        <div class="card step">
           <div class="step-no">1</div>
           <h3>Randevu Al</h3>
           <p>Uygulamadan hizmeti, gün ve saati seç.</p>
         </div>
-        <div class="card">
+        <div class="card step">
           <div class="step-no">2</div>
           <h3>Biz Gelelim</h3>
           <p>Ekibimiz evine, işyerine ya da otoparka gelsin.</p>
         </div>
-        <div class="card">
+        <div class="card step">
           <div class="step-no">3</div>
           <h3>Keyfini Çıkar</h3>
           <p>Sen işine bak, aracın tertemiz teslim edilsin.</p>
@@ -119,16 +223,25 @@
     </div>
   </section>
 
-  <section id="iletisim" class="cta">
+  <section id="iletisim">
     <div class="container">
-      <h2>Çok Yakında</h2>
-      <p>Mobiwax uygulaması çok yakında App Store ve Google Play'de.</p>
-      <a href="mailto:info@mobiwax.com" class="btn">Bize Ulaşın</a>
+      <div class="cta-box">
+        <h2>Çok yakında yayında 🚀</h2>
+        <p>Mobiwax uygulaması çok yakında App Store ve Google Play'de. İlk haberdar olanlardan ol.</p>
+        <div class="hero-actions">
+          <a href="#" class="btn store"> App Store</a>
+          <a href="#" class="btn store">▶ Google Play</a>
+        </div>
+        <div class="mail">Soruların mı var? <a href="mailto:support@waxmobi.com">support@waxmobi.com</a></div>
+      </div>
     </div>
   </section>
 
   <footer>
-    © 2026 Mobiwax. Tüm hakları saklıdır.
+    <div class="container">
+      <span>© 2026 Mobiwax. Tüm hakları saklıdır.</span>
+      <a href="mailto:support@waxmobi.com">support@waxmobi.com</a>
+    </div>
   </footer>
 
 </body>
